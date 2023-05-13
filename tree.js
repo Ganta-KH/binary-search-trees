@@ -26,13 +26,31 @@ class Tree {
         else node.right = new Node(value);
     }
 
-    minValue(node) {
-        let minv = node.value;
-        while (node.left != null) {
-            minv = node.left.value;
-            node = node.left;
+    delete(value, node = this.root) {
+        if (node == null) return node;
+        if (node.data > value) {
+            node.left = this.delete(value, node.left);
+            return node;
         }
-        return minv;
+        if (node.data < value) {
+            node.right = this.delete(value, node.right);
+            return node;
+        }
+        if (node.left == null) return node.right;
+        if (node.right == null) return node.left;
+
+        let [succParent, succ] = [node, node.right];
+
+        while (succ.left != null) {
+            succParent = succ;
+            succ = succ.left;
+        }
+        if (succParent !== node) succParent.left = succ.right;
+        else succParent.right = succ.right;
+
+        node.data = succ.data;
+
+        return node;
     }
 
     find(value, node = this.root) {
@@ -63,8 +81,9 @@ class Tree {
 }
 
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-// const arr = []
 const t = new Tree(arr);
 t.prettyPrint();
-
+t.root = t.delete(4)
+t.prettyPrint()
+console.log(t.find(23));
 export default Tree;
