@@ -60,6 +60,15 @@ class Tree {
         return null;
     }
 
+    levelOrder(queue = [this.root], arr = []) {
+        if (queue.length === 0) return arr;
+        arr.push(queue[0].data);
+        if (queue[0].left !== null) queue.push(queue[0].left);
+        if (queue[0].right !== null) queue.push(queue[0].right);
+        queue.shift();
+        return this.levelOrder(queue, arr)
+    }
+
     prettyPrint(node = this.root, prefix = "", isLeft = true) {
         if (node === null) return;
         if (node.right !== null) {
@@ -83,7 +92,9 @@ class Tree {
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const t = new Tree(arr);
 t.prettyPrint();
-t.root = t.delete(4)
-t.prettyPrint()
-console.log(t.find(23));
+// t.delete(4);
+// t.prettyPrint();
+// console.log(t.find(23));
+console.log(t.levelOrder())
+
 export default Tree;
