@@ -139,33 +139,4 @@ class Tree {
     }
 }
 
-const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const tree = new Tree(arr);
-tree.prettyPrint();
-tree.insert(28);
-tree.insert(13);
-tree.insert(14);
-tree.insert(42069);
-tree.insert(420);
-tree.insert(69);
-tree.insert(55);
-tree.insert(45);
-tree.insert(42);
-tree.insert(6969);
-tree.prettyPrint();
-// tree.delete(4);
-// tree.prettyPrint();
-// console.log(tree.find(23));
-// tree.rebalance();
-// tree.prettyPrint();
-// console.log(tree.preOrder());
-// console.log(tree.inOrder());
-// console.log(tree.postOrder());
-// console.log(tree.root.left.right.right.data);
-// console.log(tree.depth(tree.root.left.right.right))
-console.log(tree.height(tree.root))
-console.log(tree.isBalanced())
-tree.rebalance()
-console.log(tree.isBalanced());
-
 export default Tree;
