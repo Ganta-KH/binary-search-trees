@@ -108,6 +108,12 @@ class Tree {
         return 0;
     }
 
+    isBalanced(node = this.root) {
+        if (node == null) return true;
+        if (Math.abs(this.height(node.left) - this.height(node.right)) > 1) return false;
+        return true;
+    }
+
     rebalance() {
         const arr = this.inOrder();
         this.root = this.buildTree([...new Set(arr)]);
@@ -158,5 +164,8 @@ tree.prettyPrint();
 // console.log(tree.root.left.right.right.data);
 // console.log(tree.depth(tree.root.left.right.right))
 console.log(tree.height(tree.root))
+console.log(tree.isBalanced())
+tree.rebalance()
+console.log(tree.isBalanced());
 
 export default Tree;
