@@ -94,6 +94,11 @@ class Tree {
         return arr;
     }
 
+    rebalance() {
+        const arr = this.inOrder()
+        this.root = this.buildTree([...new Set(arr)])
+    }
+
     prettyPrint(node = this.root, prefix = "", isLeft = true) {
         if (!node) return;
         if (node.right) {
@@ -117,10 +122,18 @@ class Tree {
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = new Tree(arr);
 tree.prettyPrint();
+tree.insert(28)
+tree.insert(13);
+tree.insert(14);
+tree.insert(42069);
+tree.insert(420);
+tree.insert(69);
+tree.prettyPrint();
 // tree.delete(4);
 // tree.prettyPrint();
 // console.log(tree.find(23));
-// console.log(tree.levelOrder())
+tree.rebalance()
+tree.prettyPrint()
 // console.log(tree.preOrder());
 // console.log(tree.inOrder());
 // console.log(tree.postOrder());
