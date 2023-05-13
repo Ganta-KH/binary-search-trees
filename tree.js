@@ -27,7 +27,7 @@ class Tree {
     }
 
     delete(value, node = this.root) {
-        if (node == null) return node;
+        if (!node) return node;
         if (node.data > value) {
             node.left = this.delete(value, node.left);
             return node;
@@ -36,12 +36,12 @@ class Tree {
             node.right = this.delete(value, node.right);
             return node;
         }
-        if (node.left == null) return node.right;
-        if (node.right == null) return node.left;
+        if (!node.left) return node.right;
+        if (!node.right) return node.left;
 
         let [succParent, succ] = [node, node.right];
 
-        while (succ.left != null) {
+        while (succ.left) {
             succParent = succ;
             succ = succ.left;
         }
@@ -61,17 +61,42 @@ class Tree {
     }
 
     levelOrder(queue = [this.root], arr = []) {
+        if (!this.root) return [];
         if (queue.length === 0) return arr;
         arr.push(queue[0].data);
-        if (queue[0].left !== null) queue.push(queue[0].left);
-        if (queue[0].right !== null) queue.push(queue[0].right);
+        if (queue[0].left) queue.push(queue[0].left);
+        if (queue[0].right) queue.push(queue[0].right);
         queue.shift();
-        return this.levelOrder(queue, arr)
+        return this.levelOrder(queue, arr);
+    }
+
+    inOrder(node = this.root, arr = []) {
+        if (!node) return [];
+        this.inOrder(node.left, arr);
+        arr.push(node.data);
+        this.inOrder(node.right, arr);
+        return arr;
+    }
+
+    preOrder(node = this.root, arr = []) {
+        if (!node) return [];
+        arr.push(node.data);
+        this.preOrder(node.left, arr);
+        this.preOrder(node.right, arr);
+        return arr;
+    }
+
+    postOrder(node = this.root, arr = []) {
+        if (!node) return [];
+        this.postOrder(node.left, arr);
+        this.postOrder(node.right, arr);
+        arr.push(node.data);
+        return arr;
     }
 
     prettyPrint(node = this.root, prefix = "", isLeft = true) {
-        if (node === null) return;
-        if (node.right !== null) {
+        if (!node) return;
+        if (node.right) {
             this.prettyPrint(
                 node.right,
                 `${prefix}${isLeft ? "│   " : "    "}`,
@@ -79,7 +104,7 @@ class Tree {
             );
         }
         console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-        if (node.left !== null) {
+        if (node.left) {
             this.prettyPrint(
                 node.left,
                 `${prefix}${isLeft ? "    " : "│   "}`,
@@ -90,11 +115,14 @@ class Tree {
 }
 
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const t = new Tree(arr);
-t.prettyPrint();
-// t.delete(4);
-// t.prettyPrint();
-// console.log(t.find(23));
-console.log(t.levelOrder())
+const tree = new Tree(arr);
+tree.prettyPrint();
+// tree.delete(4);
+// tree.prettyPrint();
+// console.log(tree.find(23));
+// console.log(tree.levelOrder())
+// console.log(tree.preOrder());
+// console.log(tree.inOrder());
+// console.log(tree.postOrder());
 
 export default Tree;
