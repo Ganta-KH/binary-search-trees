@@ -94,9 +94,15 @@ class Tree {
         return arr;
     }
 
+    depth(node, root = this.root) {
+        if (node.data < root.data) return this.depth(node, root.left) + 1;
+        if (node.data > root.data) return this.depth(node, root.right) + 1;
+        return 0;
+    }
+
     rebalance() {
-        const arr = this.inOrder()
-        this.root = this.buildTree([...new Set(arr)])
+        const arr = this.inOrder();
+        this.root = this.buildTree([...new Set(arr)]);
     }
 
     prettyPrint(node = this.root, prefix = "", isLeft = true) {
@@ -122,7 +128,7 @@ class Tree {
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = new Tree(arr);
 tree.prettyPrint();
-tree.insert(28)
+tree.insert(28);
 tree.insert(13);
 tree.insert(14);
 tree.insert(42069);
@@ -132,10 +138,12 @@ tree.prettyPrint();
 // tree.delete(4);
 // tree.prettyPrint();
 // console.log(tree.find(23));
-tree.rebalance()
-tree.prettyPrint()
+tree.rebalance();
+tree.prettyPrint();
 // console.log(tree.preOrder());
 // console.log(tree.inOrder());
 // console.log(tree.postOrder());
+console.log(tree.root.left.right.right.data);
+console.log(tree.depth(tree.root.left.right.right))
 
 export default Tree;
