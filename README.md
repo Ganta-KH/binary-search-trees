@@ -5,7 +5,7 @@ Implementation of Binaru Search Tree BST in JavaScript
 ## Features
 
 -   `buildTree` a function which takes an array of data and turns it into a balanced binary tree full of `Node`.
--   `prettyPrint` a function that visualize the binary search tree from the consol.
+-   `prettyPrint` a function that visualize the binary search tree in the consol.
 
 ```
 │       ┌── 6345
