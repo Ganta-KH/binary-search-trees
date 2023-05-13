@@ -94,6 +94,14 @@ class Tree {
         return arr;
     }
 
+    height(node) {
+        if (node === null) return 0
+        const leftHeight = this.height(node.left) + 1
+        const rightHeight = this.height(node.right) + 1
+        if (leftHeight > rightHeight) return leftHeight
+        return rightHeight;
+    }
+
     depth(node, root = this.root) {
         if (node.data < root.data) return this.depth(node, root.left) + 1;
         if (node.data > root.data) return this.depth(node, root.right) + 1;
@@ -134,16 +142,21 @@ tree.insert(14);
 tree.insert(42069);
 tree.insert(420);
 tree.insert(69);
+tree.insert(55);
+tree.insert(45);
+tree.insert(42);
+tree.insert(6969);
 tree.prettyPrint();
 // tree.delete(4);
 // tree.prettyPrint();
 // console.log(tree.find(23));
-tree.rebalance();
-tree.prettyPrint();
+// tree.rebalance();
+// tree.prettyPrint();
 // console.log(tree.preOrder());
 // console.log(tree.inOrder());
 // console.log(tree.postOrder());
-console.log(tree.root.left.right.right.data);
-console.log(tree.depth(tree.root.left.right.right))
+// console.log(tree.root.left.right.right.data);
+// console.log(tree.depth(tree.root.left.right.right))
+console.log(tree.height(tree.root))
 
 export default Tree;
